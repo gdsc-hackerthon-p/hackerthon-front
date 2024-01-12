@@ -16,8 +16,8 @@ class MyPage extends React.Component {
           </div>
         </div>
         <div style={{ width: '40%' }}>
-          <h3 style ={{paddingRight: '10px'}}>당신의 라이벌</h3>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <h3 style ={{padding: '10px'}}>당신의 라이벌</h3>
+          <table style={{ width: '100%', borderColgitlapse: 'collapse' }}>
             <thead>
               <tr>
                 <th style={{ border: '1px solid black', padding: '15px', textAlign: 'center' }}>이름</th>
