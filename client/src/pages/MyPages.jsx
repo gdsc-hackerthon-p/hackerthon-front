@@ -1,40 +1,272 @@
 import React from 'react';
+import styled from 'styled-components';
+import {useSpring} from 'react-spring';
+import { useState } from 'react';
 
 import testImg from '../imgs/testImg.png';
+import heart from '../imgs/heart.png';
 
-class MyPage extends React.Component {
-  render() {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ width: '45%', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <img src={testImg} alt="프로필 사진" style={{ width: '50%' }} />
-          <h2 style ={{padding: '30px'}}>홍길동</h2>
-          <h4 style ={{padding: '30px'}}>20일째 커밋하고 있어요!</h4>
-          <div style={{ width: '45%', border: '1px solid black', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h3>내 포인트</h3>
-            <h2>1000점</h2>
-          </div>
-        </div>
-        <div style={{ width: '40%' }}>
-          <h3 style ={{padding: '10px'}}>당신의 라이벌</h3>
-          <table style={{ width: '100%', borderColgitlapse: 'collapse' }}>
-            <thead>
-              <tr>
-                <th style={{ border: '1px solid black', padding: '15px', textAlign: 'center' }}>이름</th>
-                <th style={{ border: '1px solid black', padding: '15px', textAlign: 'center' }}>포인트</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style={{ border: '1px solid black', padding: '15px', textAlign: 'center' }}>이몽룡</td>
-                <td style={{ border: '1px solid black', padding: '15px', textAlign: 'center' }}>1500점</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
+const NicknameChangeWindow = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+`
+const WithdrawWindow = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+`;
+
+const MyPageContainer = styled.div`
+  h1 {
+    margin: 20px 0px;
+    text-align: center;
   }
-}
+  .heart {
+    width: 50px;
+  }
+  p {
+    color: #B2B2B2B2;
+    font-size: 2rem;
+  }
+`
+
+const MyPageBox = styled.div`
+  display: flex; 
+  justify-content: space-between;
+  margin-top: 70px;
+  padding-bottom: 100px;
+`
+
+const MyPageLeftBox = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    margin: 20px 0px;
+  }
+
+  h3 {
+    margin: 10px 0px;
+    color: #B2B2B2B2;
+    font-size: 20px;
+  }
+
+  h4 {
+    margin: 10px 0px;
+    color: #000000b1;
+    font-size: 20px;
+
+  }
+
+  .mypagepoint {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mypageprofile {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+`
+
+const MyPageRightBox = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+
+  h3 {
+    margin: 10px 10px;
+    font-size: 20px;
+  }
+`
+const PointBox = styled.div`
+  margin: 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+`
+const RivalBox = styled.div`
+  display: flex;
+  margin: 10px;
+  background-color: #efefef;
+  border-radius: 25px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  .boxprofile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 0px 10px;
+  }
+  .introbox {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  .heartbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 30px;
+  }
+  p {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+`
+const Button = styled.button`
+  width: 200px;
+  height: 50px;
+  border: none;
+  color: white;
+  background-color: #b1b1b1; 
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 100px 20px;
+  align-self: flex-end;
+`
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`
+
+const MyPage = () => {
+  const [showNicknameChange, setShowNicknameChange] = useState(false);
+  const [showWithdrawWindow, setShowWithdrawWindow] = useState(false);
+
+  const springs = useSpring({
+    from: { opacity: 0 }, // 초기 상태
+    to: { opacity: 1 },      // 최종 상태   
+    config: { duration: 500 },
+  });
+
+  const handleNicknameChangeClick = () => {
+    setShowNicknameChange(!showNicknameChange);
+  };
+
+  const handleWithdrawClick = () => {
+    setShowWithdrawWindow(!showWithdrawWindow);
+  };
+
+    return (
+      <MyPageContainer>
+        <h1>마이페이지</h1>
+
+        <MyPageBox>
+
+        <MyPageLeftBox style={springs}>
+            <img src={testImg} alt="#" className='mypageprofile'/>
+            <h2>홍길동</h2>
+            <h4>20일째 커밋하고 있어요!</h4>
+            <h3>32 commits</h3>
+            
+            <PointBox>
+            <div className='mypagepoint'>
+              <img src={heart} alt="heart" className='heart' />
+              <p>242 pt</p>
+            </div>
+            </PointBox>
+        </MyPageLeftBox>
+
+        <MyPageRightBox>
+          <h3>당신의 라이벌</h3>
+
+          <RivalBox>
+          <div>
+            <img src={testImg} alt="#" className='boxprofile'/>
+          </div>
+          <div className='introbox'>
+            <h4>홍길동</h4>
+            <h3>32 commits</h3>
+            <div className='heartbox'>
+            <img src={heart} alt="heart" className='heart' />
+            <p>242 pt</p>
+            </div>
+            </div>
+          </RivalBox>
+
+          <RivalBox>
+          <div>
+            <img src={testImg} alt="#" className='boxprofile'/>
+          </div>
+          <div className='introbox'>
+            <h4>홍길동</h4>
+            <h3>32 commits</h3>
+            <div className='heartbox'>
+            <img src={heart} alt="heart" className='heart' />
+            <p>242 pt</p>
+            </div>
+            </div>
+          </RivalBox>
+
+          <RivalBox>
+          <div>
+            <img src={testImg} alt="#" className='boxprofile'/>
+          </div>
+          <div className='introbox'>
+            <h4>홍길동</h4>
+            <h3>32 commits</h3>
+            <div className='heartbox'>
+            <img src={heart} alt="heart" className='heart' />
+            <p>242 pt</p>
+            </div>
+            </div>
+          </RivalBox>
+          <ButtonContainer>
+          <Button onClick={handleNicknameChangeClick}>닉네임 변경하기</Button>
+          <Button onClick={handleWithdrawClick}>회원탈퇴</Button>
+          </ButtonContainer>
+        </MyPageRightBox>
+      </MyPageBox>
+
+      {showNicknameChange && (
+        <NicknameChangeWindow>
+          <h2>닉네임 변경</h2>
+    <form>
+      <label htmlFor="newNickname">새로운 닉네임 : </label>
+      <input type="text" id="newNickname" />
+      <button type="submit">저장</button>
+    </form>
+    <button onClick={handleNicknameChangeClick}>닫기</button>
+        </NicknameChangeWindow>
+      )}
+
+      {showWithdrawWindow && (
+        <WithdrawWindow>
+          <h2>회원탈퇴</h2>
+          <h4>탈퇴하시겠습니까?</h4>
+          <button onClick={handleWithdrawClick}>취소</button>
+          <button>탈퇴</button>
+        </WithdrawWindow>
+      )}
+
+      </MyPageContainer>
+    );
+  };
 
 export default MyPage;
