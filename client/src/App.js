@@ -6,6 +6,10 @@ import Common from './pages/Common';
 import Detail from './pages/Detail';
 import Intro from './pages/Intro';
 import SignUp from './pages/SignUp';
+import Knowledge1 from './pages/Knowledge/Knowledge1';
+import Knowledge2 from './pages/Knowledge/Knowledge2';
+import Knowledge3 from './pages/Knowledge/Knowledge3';
+import Knowledge4 from './pages/Knowledge/Knowledge4';
 
 function App() {
   return (
@@ -17,6 +21,11 @@ function App() {
           <Route path='/detail' element={<Detail/>}/>
           <Route path='/intro' element={<Intro/>}/>
           <Route path='/signup' element={<SignUp/>}/>
+          
+          <Route path='/knowledge1' element={<Knowledge1/>}/>
+          <Route path='/knowledge2' element={<Knowledge2/>}/>
+          <Route path='/knowledge3' element={<Knowledge3/>}/>
+          <Route path='/knowledge4' element={<Knowledge4/>}/>
 
         </Route>
       </Routes>

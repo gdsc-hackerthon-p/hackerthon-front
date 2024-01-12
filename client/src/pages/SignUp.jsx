@@ -24,7 +24,7 @@ const SignUpContainer = styled.div`
     margin-top: 20px;
     padding: 10px;
     border-radius: 15px;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     outline: none;
     border: none;
@@ -33,7 +33,7 @@ const SignUpContainer = styled.div`
     cursor: pointer;
   }
   p {
-    font-size: 1rem;
+    font-size: 24px;
   }
 `
 
@@ -51,7 +51,7 @@ const SignUpForm = styled.form`
   label {
     display: block;
     margin: 15px 0px;
-    font-size: 16px;
+    font-size: 36px;
     color: #949494;
   }
   input {

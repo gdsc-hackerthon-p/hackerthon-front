@@ -1,7 +1,11 @@
 /* 전체적인 기본값 */
+
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+
 body {
   max-width: 1728px;
   margin: 0 auto;
+  font-family: 'Dongle', sans-serif;
 }
 
 h1 {

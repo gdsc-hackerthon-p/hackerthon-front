@@ -4,14 +4,21 @@ import styled from 'styled-components'
 import introImg1 from '../imgs/introImg1.png';
 import introImg2 from '../imgs/introImg2.png';
 import introImg3 from '../imgs/introImg3.png';
+import { animated, useSpring } from 'react-spring';
+import Knowledge from '../components/KnowledgeSector';
 
-const IntroContainer = styled.div`
+const IntroContainer = styled(animated.div)`
   margin: 10px;
   line-height: 40px;
   h1 {
     padding: 50px;
-    line-height: 50px;
+    line-height: 60px;
+    font-size: 4rem;
+  }
+  p {
+    line-height: 52px;
     font-size: 3rem;
+    font-weight: bold;
   }
 `
 
@@ -33,6 +40,15 @@ const IntroBox = styled.div`
     top: 70px;
     right: -150px;
   }
+  @media screen and (max-width: 1100px) {
+    left: 0;
+  }
+  @media screen and (max-width: 450px) {
+    img {
+      top: -80px;
+      left: 0;
+    }
+  }
 `
 
 const IntroBox2 = styled.div`
@@ -51,6 +67,15 @@ const IntroBox2 = styled.div`
     object-fit: cover;
     top: 100px;
     left: -150px;
+  }
+  @media screen and (max-width: 1100px) {
+    left: 0;
+  }
+  @media screen and (max-width: 450px) {
+    img {
+      top: -120px;
+      left: 0;
+    }
   }
 `
 
@@ -71,11 +96,26 @@ const IntroBox3 = styled.div`
     top: 80px;
     right: -150px;
   }
+  @media screen and (max-width: 1100px) {
+    left: 0;
+  }
+  @media screen and (max-width: 450px) {
+    img {
+      top: -120px;
+      left: 0;
+    }
+  }
 `
 
 const Intro = () => {
+
+  const springs = useSpring({
+		from: {x : -400},
+		to: {x : 0}
+	})
+
   return (
-    <IntroContainer>
+    <IntroContainer style={springs}>
       <h1>모두의 커밋을<br/>소개할게요!!</h1>
       <IntroBox>
         <p>
@@ -98,6 +138,7 @@ const Intro = () => {
         </p>
         <img src={introImg3} alt="#" />
       </IntroBox3>
+      <Knowledge/>
     </IntroContainer>
   )
 }
