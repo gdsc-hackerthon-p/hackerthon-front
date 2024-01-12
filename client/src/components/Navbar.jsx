@@ -10,6 +10,7 @@ import { BsPersonSquare } from "react-icons/bs";
 import { useSpring, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import LoginBtn from './LoginBtn';
 
 const NavbarContainer = styled.div`
   position: fixed;
@@ -65,6 +66,7 @@ const Navbar = () => {
     <NavbarContainer>
       {clickBtn ? <FaAlignRight onClick={handleOnClick} size={50}/> : <FaAlignJustify onClick={handleOnClick} size={50}/>}
       <NavbarRigthBox style={springProps}>
+        <LoginBtn/>
         <Link to={'/'} onClick={handleGoPage}>
           <ImHome size={70}/>
         </Link>
