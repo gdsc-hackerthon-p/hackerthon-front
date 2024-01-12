@@ -55,6 +55,10 @@ const MainBoxMiddle = styled.div`
   margin-top: 120px;
   padding-bottom: 100px;
   border-bottom: 5px solid #D9D9D9;
+  .fristCircle {
+    position: relative;
+    bottom: 80px;
+  }
 `
 
 const MainIntroCircle = styled(animated.div)`
@@ -100,10 +104,6 @@ const MainBoxBottom = styled.div`
   flex-direction: column;
   align-items: center;
   margin:  50px;
-`
-
-const TopImg1 = styled.img`
-  margin-top: 60px;
 `
 
 const Main = () => {
@@ -171,8 +171,8 @@ const Main = () => {
             <p>242 pt</p>
           </div>
         </MainIntroCircle>
-        <MainIntroCircle style={springs}>
-          <TopImg1 src={firstCrown} alt="#" />
+        <MainIntroCircle className='fristCircle' style={springs}>
+          <img src={firstCrown} alt="#" />
           <img src={testImg} alt="#" className='mainprofile'/>
           <h2>홍길동</h2>
           <h3>32 commits</h3>

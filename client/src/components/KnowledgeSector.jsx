@@ -5,10 +5,21 @@ import styled from 'styled-components'
 import book from '../imgs/book.png';
 
 const KnowledgeContainer = styled.div`
+  margin-bottom: 100px;
   h2 {
     margin: 50px 0px;
     text-align: center;
     font-weight: bold;
+  }
+  h3 {
+    display: none;
+  }
+  @media screen and (max-width: 600px) {
+    h3 {
+      display: block;
+      font-size: 2rem;
+      text-align: center;
+    }
   }
 `
 
@@ -45,12 +56,20 @@ const KnowledgeBox = styled.div`
       width: 75px;
     }
   }
+  @media screen and (max-width: 600px) {
+    display: none;
+    h3 {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
 `
 
 const KnowledgeSector = () => {
   return (
     <KnowledgeContainer>
       <h2>더 많은 개발 지식</h2>
+      <h3>핸드폰은 지원히지 않습니다.</h3>
       <KnowledgeBox>
         <Link to={'/knowledge1'} className='linkbox'>
           <p>프로그래밍 언어는 왜 이렇게 많을까?</p>
