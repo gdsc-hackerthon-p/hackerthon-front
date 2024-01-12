@@ -5,6 +5,7 @@ import './App.css';
 import Common from './pages/Common';
 import Detail from './pages/Detail';
 import Intro from './pages/Intro';
+import Callback from './components/MyCallback';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/myPages' element={<MyPages/>}/>
           <Route path='/detail' element={<Detail/>}/>
           <Route path='/intro' element={<Intro/>}/>
+          <Route path='/callback' element={<Callback/>}/>
         </Route>
       </Routes>
     </div>

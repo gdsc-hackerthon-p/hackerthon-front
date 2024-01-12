@@ -12,11 +12,11 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-  <QueryClientProvider client={queryClient}>
-    <RecoilRoot>
-      <App /> 
-    </RecoilRoot>
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <App /> 
+      </RecoilRoot>
+    </QueryClientProvider>
   </BrowserRouter>
 );
 
