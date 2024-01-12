@@ -12,7 +12,7 @@ const NicknameChangeWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 20px;
+  padding: 20pxgit;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 `

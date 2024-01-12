@@ -6,6 +6,7 @@ import Common from './pages/Common';
 import Detail from './pages/Detail';
 import Intro from './pages/Intro';
 import Callback from './components/MyCallback';
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/detail' element={<Detail/>}/>
           <Route path='/intro' element={<Intro/>}/>
           <Route path='/callback' element={<Callback/>}/>
+          <Route path='/login' element={<Login/>}/>
         </Route>
       </Routes>
     </div>
