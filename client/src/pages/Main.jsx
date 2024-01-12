@@ -8,6 +8,7 @@ import firstCrown from '../imgs/firstCrown.png';
 import secondCrown from '../imgs/secondCrown.png';
 import thirdCrown from '../imgs/thirdCrown.png';
 import MainBottomBox from '../components/MainBottomBox';
+import MainSwiper from '../components/MainSwiper';
 
 const MainContainer = styled.div`
   h1 {
@@ -131,6 +132,7 @@ const Main = () => {
           </div>
         </MainIntroCircle>
       </MainBoxMiddle>
+      <MainSwiper/>
       <MainBoxBottom>
         <MainBottomBox/>
         <MainBottomBox/>

@@ -15,6 +15,9 @@ const DetailUserName = styled.div`
   align-items: center;
   padding-bottom: 30px;
   border-bottom: 1px solid #D9D9D9;
+  h1 {
+    font-size: 5rem;
+  }
   img {
     margin-right: 30px;
   }
@@ -29,7 +32,7 @@ const DetailTable = styled.div`
 const TableBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 25%;
   div {
     display: flex;
     justify-content: center;

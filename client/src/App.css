@@ -1,6 +1,7 @@
 /* 전체적인 기본값 */
 body {
   max-width: 1728px;
+  margin: 0 auto;
 }
 
 h1 {
