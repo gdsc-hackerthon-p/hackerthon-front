@@ -84,11 +84,13 @@ const MainBoxBottom = styled.div`
 `
 
 const Main = () => {
+
   const springs = useSpring({
     from: { opacity: 0 }, // 초기 상태
     to: { opacity: 1 },      // 최종 상태   
     config: { duration: 500 },
   });
+
   return (
     <MainContainer>
       <h1>모두의 커밋</h1>
