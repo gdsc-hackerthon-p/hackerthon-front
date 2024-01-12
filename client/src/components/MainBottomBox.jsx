@@ -24,10 +24,26 @@ const BottomBox = styled(animated.div)`
     justify-content: space-between;
     align-items: center;
     margin: 0px 40px;
+    h2 {
+      font-size: 2rem;
+    }
+    @media screen and (max-width: 1000px){
+      gap: 25px;
+      margin-bottom: 15px;
+    }
+    @media screen and (max-width: 700px){
+      h3 {
+        display: none;
+      }
+    }
   }
   .heartbox {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+  @media screen and (max-width: 1000px){
+    flex-direction: column;
     align-items: center;
   }
 `
