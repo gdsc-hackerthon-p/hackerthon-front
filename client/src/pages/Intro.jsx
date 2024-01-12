@@ -5,6 +5,7 @@ import introImg1 from '../imgs/introImg1.png';
 import introImg2 from '../imgs/introImg2.png';
 import introImg3 from '../imgs/introImg3.png';
 import { animated, useSpring } from 'react-spring';
+import Knowledge from '../components/KnowledgeSector';
 
 const IntroContainer = styled(animated.div)`
   margin: 10px;
@@ -137,6 +138,7 @@ const Intro = () => {
         </p>
         <img src={introImg3} alt="#" />
       </IntroBox3>
+      <Knowledge/>
     </IntroContainer>
   )
 }

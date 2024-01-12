@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring'
+import { useSpring, animated, useInView } from 'react-spring'
 
 import testImg from '../imgs/testImg.png';
 import heart from '../imgs/heart.png';
@@ -9,6 +9,8 @@ import secondCrown from '../imgs/secondCrown.png';
 import thirdCrown from '../imgs/thirdCrown.png';
 import MainBottomBox from '../components/MainBottomBox';
 import MainSwiper from '../components/MainSwiper';
+import axios from 'axios';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 const MainContainer = styled(animated.div)`
   h1 {
@@ -106,10 +108,49 @@ const TopImg1 = styled.img`
 
 const Main = () => {
 
+  const {ref, inView} = useInView();
+
   const springs = useSpring({
 		from: {x : -400},
 		to: {x : 0}
   });
+
+  // const fetchTodos = async ({pageParam}) => {
+  //   const res = await axios.get(`https://hackerthon.thisiswandol.com:8443/api/user/ranking?size=10&page=${pageParam}`);
+  //   return res.data;
+  // }
+
+  // const { data, status, error, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery({
+  //   queryKey: ['todos'],
+  //   queryFn: fetchTodos,
+  //   initialPageParam: 1,
+  //   getNextPageParam: (lastpage, allpage) => {
+  //     const nextPage = lastpage.length ? allpage.length + 1 : undefined ;
+  //     return nextPage
+  //   }
+  // })
+
+  // console.log(data)
+
+  // const content = data?.pages.map((todos) => 
+  //   todos.map((todo) => {
+  //     return <MainBottomBox key={todo.id} todo={todo}/>
+  //   })
+  // );
+
+  // useEffect(() => {
+  //   if(inView) {
+  //     fetchNextPage();
+  //   }
+  // },[inView, fetchNextPage])
+
+  // if(status === 'pending') {
+  //   return <p>Loading....</p>
+  // }
+  // if(status === 'error') {
+  //   return <p>Error : {error.message}</p>
+  // }
+
 
   return (
     <MainContainer style={springs}>
