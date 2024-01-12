@@ -111,8 +111,8 @@ const Main = () => {
   const {ref, inView} = useInView();
 
   const springs = useSpring({
-		from: {x : -400},
-		to: {x : 0}
+    from: { transform: 'translateX(-400px)' },
+    to: { transform: 'translateX(0)' }
   });
 
   // const fetchTodos = async ({pageParam}) => {
