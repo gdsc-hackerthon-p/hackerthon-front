@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import { BottomSheet } from "react-spring-bottom-sheet";
 import 'react-spring-bottom-sheet/dist/style.css';
 
-import { FaAlignRight, FaAlignJustify, FaBookBookmark } from "react-icons/fa6";
+import { FaAlignRight, FaAlignJustify, FaBookBookmark, FaArrowRightFromBracket, FaArrowRightToBracket } from "react-icons/fa6";
 import { ImHome } from "react-icons/im";
 import { FaSearch } from "react-icons/fa";
 import { BsPersonSquare } from "react-icons/bs";
 import { useSpring, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 import Search from './Search';
-import LoginBtn from './LoginBtn';
 
 const NavbarContainer = styled.div`
   position: fixed;
@@ -33,6 +32,14 @@ const NavbarRigthBox = styled(animated.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   a {
     color: black;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .searchBtn {
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 `
 
@@ -66,7 +73,9 @@ const Navbar = () => {
     <NavbarContainer>
       {clickBtn ? <FaAlignRight onClick={handleOnClick} size={50}/> : <FaAlignJustify onClick={handleOnClick} size={50}/>}
       <NavbarRigthBox style={springProps}>
-        <LoginBtn/>
+        <Link to={'/signup'} onClick={handleGoPage}>
+          <FaArrowRightToBracket size={70}/>
+        </Link>
         <Link to={'/'} onClick={handleGoPage}>
           <ImHome size={70}/>
         </Link>
@@ -76,7 +85,7 @@ const Navbar = () => {
         <Link to={'/intro'} onClick={handleGoPage} >
           <FaBookBookmark size={70}/>
         </Link>
-        <FaSearch size={70} onClick={handleDismiss}/>
+        <FaSearch className='searchBtn' size={70} onClick={handleDismiss}/>
       </NavbarRigthBox>
       <div>
         <BottomSheet 

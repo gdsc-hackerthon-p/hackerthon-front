@@ -10,6 +10,9 @@ const SearchContainer = styled.div`
   .inputsearch {
     position: relative;
     right: 60px;
+    @media screen and (max-width:700px) {
+      right: 40px;
+    }
   }
 `
 
@@ -27,6 +30,9 @@ const SearchInput = styled.input`
   }
   @media screen and (max-width:700px) {
     font-size: 1rem;
+  }
+  @media screen and (max-width:700px) {
+    padding-left: 20px;
   }
 `
 
@@ -49,8 +55,8 @@ const Search = () => {
 
   return (
     <SearchContainer>
-      <SearchInput value={user} onChange={handleChange} onKeyDown={handleKeyPress} placeholder='찾고 싶은 유저를 검색하세요.'/>
-      <FaSearch className='inputsearch' size={40} onClick={handleOnClick}/>
+      <SearchInput value={user} onChange={handleChange} onKeyDown={handleKeyPress} placeholder='찾고 싶은 유저 검색'/>
+      <FaSearch className='inputsearch' size={30} onClick={handleOnClick}/>
     </SearchContainer>
   )
 }
