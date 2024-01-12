@@ -1,3 +1,5 @@
+import { useMutation, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -58,26 +60,32 @@ const LoginButton = styled.button`
 
 function Login() {
     const [inputs, setInputs] = useState({
-        username: '',
-        password: '',
-      });
-
-      // 사용자 입력에 따라 아이디와 비밀번호 상태를 업데이트
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
+      username: '',
+      password: '',
     });
-  };
 
-    // 폼 제출 시 아이디와 비밀번호를 콘솔에 출력
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    };
+
+    const createMutation = useMutation({
+      queryKey: ['userLogin'],
+      queryFn:(newLogin) => {return axios.post('https://hackerthon.thisiswandol.com:8443/api/auth/login', newLogin)},
+      onSuccess: e => {
+        console.log(e)
+      },
+      onError: e => {
+        console.log(e)
+      }
+    })
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, password } = inputs;
-    console.log(`Username: ${username}`);
-    console.log(`Password: ${password}`);
-    // 서버로 데이터 로직 구현
+    createMutation.mutate(inputs)
   };
 
     return (
