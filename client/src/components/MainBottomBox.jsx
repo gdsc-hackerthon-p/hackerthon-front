@@ -13,6 +13,9 @@ const BottomBox = styled(animated.div)`
   background-color: #FFA9A9;
   border-radius: 25px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  h3 {
+    font-size: 3rem;
+  }
   .boxprofile {
     width: 150px;
     height: 150px;
@@ -25,7 +28,7 @@ const BottomBox = styled(animated.div)`
     align-items: center;
     margin: 0px 40px;
     h2 {
-      font-size: 2rem;
+      font-size: 3rem;
     }
     @media screen and (max-width: 1000px){
       gap: 25px;
@@ -36,11 +39,17 @@ const BottomBox = styled(animated.div)`
         display: none;
       }
     }
+    @media screen and (max-width: 450px){
+      flex-direction: column;
+    }
   }
   .heartbox {
     display: flex;
     justify-content: center;
     align-items: center;
+    p {
+      color: black;
+    }
   }
   @media screen and (max-width: 1000px){
     flex-direction: column;

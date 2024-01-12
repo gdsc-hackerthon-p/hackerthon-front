@@ -32,6 +32,14 @@ const NavbarRigthBox = styled(animated.div)`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   a {
     color: black;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .searchBtn {
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 `
 
@@ -77,7 +85,7 @@ const Navbar = () => {
         <Link to={'/intro'} onClick={handleGoPage} >
           <FaBookBookmark size={70}/>
         </Link>
-        <FaSearch size={70} onClick={handleDismiss}/>
+        <FaSearch className='searchBtn' size={70} onClick={handleDismiss}/>
       </NavbarRigthBox>
       <div>
         <BottomSheet 

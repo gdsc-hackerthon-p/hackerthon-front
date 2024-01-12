@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import firstCrown from '../imgs/firstCrown.png';
 import testImg from '../imgs/testImg.png';
 import goldFrame from '../imgs/goldframe.png';
+import frame from '../imgs/frame.png';
 
 const MainSwiperContainer = styled.div`
   padding-bottom: 25px;
@@ -29,6 +30,7 @@ const MainSwiperContainer = styled.div`
   }
 
   .swiper {
+    padding: 10px;
     height: 250px;
   }
 
@@ -65,7 +67,7 @@ const MainSwiper = () => {
       <Swiper
         modules={[Autoplay]}
         spaceBetween={50}
-        slidesPerView={4}
+        slidesPerView={2}
         autoplay={{
           delay: 2000,
           disableOnInteraction: false
@@ -84,7 +86,6 @@ const MainSwiper = () => {
             spaceBetween: 50
           }
         }}
-        onSlideChange={() => console.log('slide change')}
       >
         <SwiperSlide className='slide'>
           <img src={testImg} alt="#" />
