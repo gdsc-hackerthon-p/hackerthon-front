@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import { BottomSheet } from "react-spring-bottom-sheet";
 import 'react-spring-bottom-sheet/dist/style.css';
 
-import { FaAlignRight, FaAlignJustify, FaBookBookmark } from "react-icons/fa6";
+import { FaAlignRight, FaAlignJustify, FaBookBookmark, FaArrowRightFromBracket, FaArrowRightToBracket } from "react-icons/fa6";
 import { ImHome } from "react-icons/im";
 import { FaSearch } from "react-icons/fa";
 import { BsPersonSquare } from "react-icons/bs";
 import { useSpring, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 import Search from './Search';
-import LoginBtn from './LoginBtn';
 
 const NavbarContainer = styled.div`
   position: fixed;
@@ -66,7 +65,9 @@ const Navbar = () => {
     <NavbarContainer>
       {clickBtn ? <FaAlignRight onClick={handleOnClick} size={50}/> : <FaAlignJustify onClick={handleOnClick} size={50}/>}
       <NavbarRigthBox style={springProps}>
-        <LoginBtn/>
+        <Link to={'/signup'} onClick={handleGoPage}>
+          <FaArrowRightToBracket size={70}/>
+        </Link>
         <Link to={'/'} onClick={handleGoPage}>
           <ImHome size={70}/>
         </Link>
