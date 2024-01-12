@@ -5,6 +5,9 @@ import './App.css';
 import Common from './pages/Common';
 import Detail from './pages/Detail';
 import Intro from './pages/Intro';
+
+import Callback from './components/MyCallback';
+import Login from './pages/Login'
 import SignUp from './pages/SignUp';
 import Knowledge1 from './pages/Knowledge/Knowledge1';
 import Knowledge2 from './pages/Knowledge/Knowledge2';
@@ -20,13 +23,13 @@ function App() {
           <Route path='/myPages' element={<MyPages/>}/>
           <Route path='/detail' element={<Detail/>}/>
           <Route path='/intro' element={<Intro/>}/>
+          <Route path='/callback' element={<Callback/>}/>
+          <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
-          
           <Route path='/knowledge1' element={<Knowledge1/>}/>
           <Route path='/knowledge2' element={<Knowledge2/>}/>
           <Route path='/knowledge3' element={<Knowledge3/>}/>
           <Route path='/knowledge4' element={<Knowledge4/>}/>
-
         </Route>
       </Routes>
     </div>
