@@ -1,1 +1,12 @@
+/* 전체적인 기본값 */
+body {
+  max-width: 1728px;
+}
 
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  font-size: 3rem;
+}
