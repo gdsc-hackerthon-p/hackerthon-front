@@ -5,6 +5,7 @@ import { useSpring, animated } from 'react-spring';
 
 import testImg from '../imgs/testImg.png';
 import heart from '../imgs/heart.png';
+import { useNavigate } from 'react-router-dom';
 
 const BottomBox = styled(animated.div)`
   display: flex;
@@ -13,6 +14,7 @@ const BottomBox = styled(animated.div)`
   background-color: #FFA9A9;
   border-radius: 25px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  cursor: pointer;
   h3 {
     font-size: 3rem;
   }
@@ -57,7 +59,8 @@ const BottomBox = styled(animated.div)`
   }
 `
 
-const MainBottomBox = () => {
+const MainBottomBox = ({data}) => {
+  const navigate = useNavigate();
 
   const [ref, inView] = useInView({
     threshold: 0.5
@@ -68,20 +71,28 @@ const MainBottomBox = () => {
     transform: inView ? 'translateY(0)' : 'translateY(100px)',
   });
 
+  const handleOnClick = (data) => {
+    navigate(`/detail/${data}`)
+  }
+
   return (
-    <BottomBox ref={ref} style={springProps}>
-      <div>
-        <img src={testImg} alt="#" className='boxprofile'/>
-      </div>
-      <div className='introbox'>
-        <h2>홍길동</h2>
-        <h3>32 commits</h3>
-        <div className='heartbox'>
-          <img src={heart} alt="heart" className='heart' />
-          <p>232 pt</p>
+    <>
+    {data && (
+      <BottomBox ref={ref} style={springProps} onClick={() => handleOnClick(data.nickname)}>
+        <div>
+          <img src={testImg} alt="#" className='boxprofile'/>
         </div>
-      </div>
-    </BottomBox>
+        <div className='introbox'>
+          <h2>{data.nickname}</h2>
+          <h3>{data.commit} commits</h3>
+          <div className='heartbox'>
+            <img src={heart} alt="heart" className='heart' />
+            <p>{data.commit} pt</p>
+          </div>
+        </div>
+      </BottomBox>
+    )}
+    </>
   )
 }
 

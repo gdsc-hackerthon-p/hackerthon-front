@@ -5,6 +5,9 @@ import { useState } from 'react';
 
 import testImg from '../imgs/testImg.png';
 import heart from '../imgs/heart.png';
+import axios from 'axios';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const NicknameChangeWindow = styled.div`
   position: fixed;
@@ -76,6 +79,16 @@ const MyPageLeftBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:active {
+      transform: scale(1.0);
+    }
+    p {
+      color: black;
+    }
   }
   
   .mypageprofile {
@@ -156,6 +169,9 @@ const ButtonContainer = styled.div`
 `
 
 const MyPage = () => {
+
+  const navigate = useNavigate();
+
   const [showNicknameChange, setShowNicknameChange] = useState(false);
   const [showWithdrawWindow, setShowWithdrawWindow] = useState(false);
 
@@ -173,76 +189,106 @@ const MyPage = () => {
     setShowWithdrawWindow(!showWithdrawWindow);
   };
 
+  const name = localStorage.getItem('user')
+  let number = 0;
+
+  const fetchData = async() => {
+    const res = await axios.get(`http://localhost:4000/userpage?usernickname=${name}`);
+    return res.data;
+  }
+
+  const {data} = useQuery({
+    queryKey: ['userDetail'],
+    queryFn: fetchData
+  })
+
+  const UpMutation = useMutation({
+    mutationKey: ['createUser'],
+    mutationFn: (newTodo) => { return axios.post('http://localhost:4000/commitup', newTodo) },
+    onSuccess: () => { 
+      alert("하루 1 커밋 축하합니다!!")
+    },
+    onError: (error) => { console.error('Error creating todo:', error); }
+  })
+
+  const handleOnClick = () => {
+    if(number > 1) {
+      return alert('하루에 1커밋만 가능합니다!!')
+    }
+    number += 1;
+    UpMutation.mutate({commitUp: 1, name});
+  }
+
     return (
       <MyPageContainer>
         <h1>마이페이지</h1>
+        {data?.map(item => (
+          <MyPageBox>
+            <MyPageLeftBox style={springs}>
+                <img src={testImg} alt="#" className='mypageprofile'/>
+                <h2>{item.nickname}</h2>
+                <h4>20일째 커밋하고 있어요!</h4>
+                <h3>{item.commit} commits</h3>
+                
+                <PointBox>
+                <div className='mypagepoint' onClick={handleOnClick}>
+                  <img src={heart} alt="heart" className='heart' />
+                  <p>하루 1커밋 올리기</p>
+                </div>
+                </PointBox>
+            </MyPageLeftBox>
 
-        <MyPageBox>
+            <MyPageRightBox>
+              <h3>당신의 라이벌</h3>
 
-        <MyPageLeftBox style={springs}>
-            <img src={testImg} alt="#" className='mypageprofile'/>
-            <h2>홍길동</h2>
-            <h4>20일째 커밋하고 있어요!</h4>
-            <h3>32 commits</h3>
-            
-            <PointBox>
-            <div className='mypagepoint'>
-              <img src={heart} alt="heart" className='heart' />
-              <p>242 pt</p>
-            </div>
-            </PointBox>
-        </MyPageLeftBox>
+              <RivalBox>
+              <div>
+                <img src={testImg} alt="#" className='boxprofile'/>
+              </div>
+              <div className='introbox'>
+                <h4>홍길동</h4>
+                <h3>32 commits</h3>
+                <div className='heartbox'>
+                <img src={heart} alt="heart" className='heart' />
+                <p>242 pt</p>
+                </div>
+                </div>
+              </RivalBox>
 
-        <MyPageRightBox>
-          <h3>당신의 라이벌</h3>
+              <RivalBox>
+              <div>
+                <img src={testImg} alt="#" className='boxprofile'/>
+              </div>
+              <div className='introbox'>
+                <h4>홍길동</h4>
+                <h3>32 commits</h3>
+                <div className='heartbox'>
+                <img src={heart} alt="heart" className='heart' />
+                <p>242 pt</p>
+                </div>
+                </div>
+              </RivalBox>
 
-          <RivalBox>
-          <div>
-            <img src={testImg} alt="#" className='boxprofile'/>
-          </div>
-          <div className='introbox'>
-            <h4>홍길동</h4>
-            <h3>32 commits</h3>
-            <div className='heartbox'>
-            <img src={heart} alt="heart" className='heart' />
-            <p>242 pt</p>
-            </div>
-            </div>
-          </RivalBox>
-
-          <RivalBox>
-          <div>
-            <img src={testImg} alt="#" className='boxprofile'/>
-          </div>
-          <div className='introbox'>
-            <h4>홍길동</h4>
-            <h3>32 commits</h3>
-            <div className='heartbox'>
-            <img src={heart} alt="heart" className='heart' />
-            <p>242 pt</p>
-            </div>
-            </div>
-          </RivalBox>
-
-          <RivalBox>
-          <div>
-            <img src={testImg} alt="#" className='boxprofile'/>
-          </div>
-          <div className='introbox'>
-            <h4>홍길동</h4>
-            <h3>32 commits</h3>
-            <div className='heartbox'>
-            <img src={heart} alt="heart" className='heart' />
-            <p>242 pt</p>
-            </div>
-            </div>
-          </RivalBox>
-          <ButtonContainer>
-          <Button onClick={handleNicknameChangeClick}>닉네임 변경하기</Button>
-          <Button onClick={handleWithdrawClick}>회원탈퇴</Button>
-          </ButtonContainer>
-        </MyPageRightBox>
-      </MyPageBox>
+              <RivalBox>
+              <div>
+                <img src={testImg} alt="#" className='boxprofile'/>
+              </div>
+              <div className='introbox'>
+                <h4>홍길동</h4>
+                <h3>32 commits</h3>
+                <div className='heartbox'>
+                <img src={heart} alt="heart" className='heart' />
+                <p>242 pt</p>
+                </div>
+                </div>
+              </RivalBox>
+              <ButtonContainer>
+              <Button onClick={handleNicknameChangeClick}>닉네임 변경하기</Button>
+              <Button onClick={handleWithdrawClick}>회원탈퇴</Button>
+              </ButtonContainer>
+            </MyPageRightBox>
+          </MyPageBox>
+        ))}
 
       {showNicknameChange && (
         <NicknameChangeWindow>

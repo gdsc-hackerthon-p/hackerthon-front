@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import { useSpring, animated, useInView } from 'react-spring'
+import { useSpring, animated } from 'react-spring'
+
+import { useQuery } from '@tanstack/react-query';
 
 import testImg from '../imgs/testImg.png';
 import heart from '../imgs/heart.png';
@@ -10,7 +12,6 @@ import thirdCrown from '../imgs/thirdCrown.png';
 import MainBottomBox from '../components/MainBottomBox';
 import MainSwiper from '../components/MainSwiper';
 import axios from 'axios';
-import { useInfiniteQuery } from '@tanstack/react-query';
 
 const MainContainer = styled(animated.div)`
   h1 {
@@ -108,98 +109,84 @@ const MainBoxBottom = styled.div`
 
 const Main = () => {
 
-  const {ref, inView} = useInView();
-
   const springs = useSpring({
     from: { transform: 'translateX(-400px)' },
     to: { transform: 'translateX(0)' }
   });
 
-  // const fetchTodos = async ({pageParam}) => {
-  //   const res = await axios.get(`https://hackerthon.thisiswandol.com:8443/api/user/ranking?size=10&page=${pageParam}`);
-  //   return res.data;
-  // }
+  const fetchData = async() => {
+    const res = await axios.get('http://localhost:4000/user');
+    return res.data;
+  }
 
-  // const { data, status, error, fetchNextPage, isFetchingNextPage, hasNextPage } = useInfiniteQuery({
-  //   queryKey: ['todos'],
-  //   queryFn: fetchTodos,
-  //   initialPageParam: 1,
-  //   getNextPageParam: (lastpage, allpage) => {
-  //     const nextPage = lastpage.length ? allpage.length + 1 : undefined ;
-  //     return nextPage
-  //   }
-  // })
+  const fetchData2 = async() => {
+    const res = await axios.get('http://localhost:4000/user');
+    return res.data.slice(11);
+  }
 
-  // console.log(data)
+  const {data, status, error} = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: fetchData
+  })
 
-  // const content = data?.pages.map((todos) => 
-  //   todos.map((todo) => {
-  //     return <MainBottomBox key={todo.id} todo={todo}/>
-  //   })
-  // );
+  const {data: data2 } = useQuery({
+    queryKey: ['userInfo2'],
+    queryFn: fetchData
+  })
 
-  // useEffect(() => {
-  //   if(inView) {
-  //     fetchNextPage();
-  //   }
-  // },[inView, fetchNextPage])
-
-  // if(status === 'pending') {
-  //   return <p>Loading....</p>
-  // }
-  // if(status === 'error') {
-  //   return <p>Error : {error.message}</p>
-  // }
+  if(status === 'error') {
+    console.log(error)
+  }
 
 
   return (
     <MainContainer style={springs}>
       <h1>모두의 커밋</h1>
       <MainBoxTop>
-        <button>TODAY</button>
-        <button>WEEK</button>
-        <button>MONTH</button>
       </MainBoxTop>
       <MainBoxMiddle>
-        <MainIntroCircle>
-          <img src={secondCrown} alt="#" />
-          <img src={testImg} alt="#" className='mainprofile'/>
-          <h2>홍길동</h2>
-          <h3>32 commits</h3>
-          <div className='mainpoint'>
-            <img src={heart} alt="heart" className='heart' />
-            <p>242 pt</p>
-          </div>
-        </MainIntroCircle>
-        <MainIntroCircle className='fristCircle' style={springs}>
-          <img src={firstCrown} alt="#" />
-          <img src={testImg} alt="#" className='mainprofile'/>
-          <h2>홍길동</h2>
-          <h3>32 commits</h3>
-          <div className='mainpoint'>
-            <img src={heart} alt="heart" className='heart' />
-            <p>242 pt</p>
-          </div>
-        </MainIntroCircle>
-        <MainIntroCircle style={springs}>
-          <img src={thirdCrown} alt="#" />
-          <img src={testImg} alt="#" className='mainprofile'/>
-          <h2>홍길동</h2>
-          <h3>32 commits</h3>
-          <div className='mainpoint'>
-            <img src={heart} alt="heart" className='heart' />
-            <p>242 pt</p>
-          </div>
-        </MainIntroCircle>
-      </MainBoxMiddle>
+      {data && data.length >= 3 && (
+        <>
+          <MainIntroCircle>
+            <img src={secondCrown} alt="#" />
+            <img src={testImg} alt="#" className='mainprofile' />
+            <h2>{data[0].nickname}</h2>
+            <h3>{data[0].commit} commits</h3>
+            <div className='mainpoint'>
+              <img src={heart} alt="heart" className='heart' />
+              <p>{data[0].commit} pt</p>
+            </div>
+          </MainIntroCircle>
+          <MainIntroCircle className='fristCircle' style={springs}>
+            <img src={firstCrown} alt="#" />
+            <img src={testImg} alt="#" className='mainprofile' />
+            <h2>{data[1].nickname}</h2>
+            <h3>{data[1].commit} commits</h3>
+            <div className='mainpoint'>
+              <img src={heart} alt="heart" className='heart' />
+              <p>{data[1].commit} pt</p>
+            </div>
+          </MainIntroCircle>
+          <MainIntroCircle style={springs}>
+            <img src={thirdCrown} alt="#" />
+            <img src={testImg} alt="#" className='mainprofile' />
+            <h2>{data[2].nickname}</h2>
+            <h3>{data[2].commit} commits</h3>
+            <div className='mainpoint'>
+              <img src={heart} alt="heart" className='heart' />
+              <p>{data[2].commit} pt</p>
+            </div>
+          </MainIntroCircle>
+        </>
+      )}
+    </MainBoxMiddle>
       <MainSwiper/>
       <MainBoxBottom>
-        <MainBottomBox/>
-        <MainBottomBox/>
-        <MainBottomBox/>
-        <MainBottomBox/>
-        <MainBottomBox/>
-        <MainBottomBox/>
+        {data2?.map(item => (
+          <>
+            <MainBottomBox data={item}/>
+          </>
+        ))}
       </MainBoxBottom>
     </MainContainer>
   )

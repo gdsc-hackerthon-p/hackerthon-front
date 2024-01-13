@@ -90,7 +90,8 @@ const SignUp = () => {
     username: '',
     nickname: '',
     password: '',
-    githubId: ''
+    githubId: '',
+    commit:''
   })
 
   const [nameTest, setNameTest] = useState(true);
@@ -142,7 +143,7 @@ const SignUp = () => {
 
   const signupMutation = useMutation({
     mutationKey: ['createUser'],
-    mutationFn: (newTodo) => { return axios.post('https://hackerthon.thisiswandol.com:8443/api/auth/register', newTodo) },
+    mutationFn: (newTodo) => { return axios.post('http://localhost:4000/signup', newTodo) },
     onSuccess: () => { 
       alert('회원가입에 성공하셨습니다.')
       navigate('/login') 
@@ -170,11 +171,15 @@ const SignUp = () => {
           <label htmlFor="nickname">닉네임</label>
           <input type="text" id="nickname" name="nickname" value={user.nickname} onChange={handleOnChangeUser} placeholder="닉네임"/>
         </SignUpNameBox>
+        <SignUpNameBox>
+          <label htmlFor="commit">커밋</label>
+          <input type="text" id="commit" name="commit" value={user.commit} onChange={handleOnChangeUser} placeholder="커밋개수"/>
+        </SignUpNameBox>
         <SignUpPasswordBox>
           <label htmlFor="password">비밀번호</label>
           <input type="password" id="password" name="password" value={user.password} autoComplete="current-password" onChange={handleOnChangeUser} placeholder="비밀번호" onBlur={handlePasswordBlur}/>
           {/* <input type="password" name="checkPassword" value={user.checkPassword} autoComplete="current-password" onChange={handleOnChangeUser} placeholder="비밀번호 확인"/> */}
-          {/* {passwordTest ? '' : <p>영문 대문자와 소문자, 숫자, 특수문자 중<br/> 2가지 이상을 조합하여 6 ~ 20자로 입력해 주세요.</p>} */}
+          {passwordTest ? '' : <p>영문 대문자와 소문자, 숫자, 특수문자 중<br/> 2가지 이상을 조합하여 6 ~ 20자로 입력해 주세요.</p>}
         </SignUpPasswordBox>
       </SignUpForm>
       <button className="registerbutton" onClick={handleLegister}>가입하기</button>

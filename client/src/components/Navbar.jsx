@@ -73,7 +73,7 @@ const Navbar = () => {
     <NavbarContainer>
       {clickBtn ? <FaAlignRight onClick={handleOnClick} size={50}/> : <FaAlignJustify onClick={handleOnClick} size={50}/>}
       <NavbarRigthBox style={springProps}>
-        <Link to={'/signup'} onClick={handleGoPage}>
+        <Link to={'/login'} onClick={handleGoPage}>
           <FaArrowRightToBracket size={70}/>
         </Link>
         <Link to={'/'} onClick={handleGoPage}>

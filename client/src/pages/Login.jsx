@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LoginContainer = styled.div`
@@ -59,6 +60,9 @@ const LoginButton = styled.button`
 `
 
 function Login() {
+
+  const navigate = useNavigate();
+
     const [inputs, setInputs] = useState({
       username: '',
       password: '',
@@ -73,10 +77,11 @@ function Login() {
     };
 
     const createMutation = useMutation({
-      queryKey: ['userLogin'],
-      queryFn:(newLogin) => {return axios.post('https://hackerthon.thisiswandol.com:8443/api/auth/login', newLogin)},
+      mutationKey: ['userLogin'],
+      mutationFn:(newLogin) => { return axios.post('http://localhost:4000/login', newLogin)},
       onSuccess: e => {
-        console.log(e)
+        localStorage.setItem('user', e.data[0].username)
+        navigate('/')
       },
       onError: e => {
         console.log(e)
@@ -87,6 +92,10 @@ function Login() {
     e.preventDefault();
     createMutation.mutate(inputs)
   };
+
+  const handleOnClick = () => {
+    navigate('/signup')
+  }
 
     return (
       <LoginContainer>
@@ -123,7 +132,7 @@ function Login() {
         <LoginButton type = "submit" id="login">로그인</LoginButton>
         </form>
 
-        <p>계정이 없으신가요? <button> 회원가입</button></p>
+        <p>계정이 없으신가요? <button onClick={handleOnClick}> 회원가입</button></p>
         </LoginContainer>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -38,6 +39,8 @@ const SearchInput = styled.input`
 
 const Search = () => {
 
+  const navigate = useNavigate();
+
   const [user, setUser] = useState('');
 
   const handleChange = (e) => {
@@ -46,11 +49,12 @@ const Search = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      // Enter 키를 눌렀을 때 특정 작업 수행
+      navigate(`/detail/${user}`)
     }
   };
 
   const handleOnClick= (e) => {
+    navigate(`/detail/${user}`)
   }
 
   return (

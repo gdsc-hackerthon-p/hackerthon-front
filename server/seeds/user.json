@@ -1,0 +1,155 @@
+[
+  {
+    "username": "chan",
+    "password": "1234",
+    "nickname": "찬영몬",
+    "githubId": "kind@naver.com",
+    "commit": "6351"
+  },
+  {
+    "username": "jung",
+    "password": "1341",
+    "nickname": "우끼",
+    "githubId": "kind@naver.com",
+    "commit": "7120"
+  },
+  {
+    "username": "hong",
+    "password": "2222",
+    "nickname": "사냥개",
+    "githubId": "user2@naver.com",
+    "commit": "6122"
+  },
+  {
+    "username": "user3",
+    "password": "3333",
+    "nickname": "바나나우유",
+    "githubId": "user3@naver.com",
+    "commit": "4141"
+  },
+  {
+    "username": "user4",
+    "password": "4444",
+    "nickname": "케챱도둑",
+    "githubId": "user4@naver.com",
+    "commit": "4330"
+  },
+  {
+    "username": "user5",
+    "password": "5555",
+    "nickname": "너의모습",
+    "githubId": "user5@naver.com",
+    "commit": "3930"
+  },
+  {
+    "username": "user6",
+    "password": "6666",
+    "nickname": "하늘보이",
+    "githubId": "user6@naver.com",
+    "commit": "4441"
+  },
+  {
+    "username": "user7",
+    "password": "7777",
+    "nickname": "곤드레",
+    "githubId": "user7@naver.com",
+    "commit": "4730"
+  },
+  {
+    "username": "user8",
+    "password": "8888",
+    "nickname": "댜댜이",
+    "githubId": "user8@naver.com",
+    "commit": "3801"
+  },
+  {
+    "username": "user9",
+    "password": "9999",
+    "nickname": "그냥지어",
+    "githubId": "user9@naver.com",
+    "commit": "4455"
+  },
+  {
+    "username": "user10",
+    "password": "1010",
+    "nickname": "그래놀라",
+    "githubId": "user10@naver.com",
+    "commit": "3030"
+  },  {
+    "username": "chan",
+    "password": "12344",
+    "nickname": "글라이더",
+    "githubId": "kind@naver.com",
+    "commit": "3451"
+  },
+  {
+    "username": "jung",
+    "password": "1341",
+    "nickname": "우끼끼",
+    "githubId": "kind@naver.com",
+    "commit": "3521"
+  },
+  {
+    "username": "hong",
+    "password": "2222",
+    "nickname": "롯데리아",
+    "githubId": "user2@naver.com",
+    "commit": "1111"
+  },
+  {
+    "username": "user3",
+    "password": "3333",
+    "nickname": "딸기우유",
+    "githubId": "user3@naver.com",
+    "commit": "421"
+  },
+  {
+    "username": "user4",
+    "password": "4444",
+    "nickname": "머스타드도둑",
+    "githubId": "user4@naver.com",
+    "commit": "50"
+  },
+  {
+    "username": "user5",
+    "password": "5555",
+    "nickname": "모습",
+    "githubId": "user5@naver.com",
+    "commit": "10"
+  },
+  {
+    "username": "user6",
+    "password": "6666",
+    "nickname": "하늘",
+    "githubId": "user6@naver.com",
+    "commit": "41"
+  },
+  {
+    "username": "user7",
+    "password": "7777",
+    "nickname": "만드레",
+    "githubId": "user7@naver.com",
+    "commit": "40"
+  },
+  {
+    "username": "user8",
+    "password": "8888",
+    "nickname": "도도",
+    "githubId": "user8@naver.com",
+    "commit": "2"
+  },
+  {
+    "username": "user9",
+    "password": "9999",
+    "nickname": "쿠쿠다스",
+    "githubId": "user9@naver.com",
+    "commit": "544"
+  },
+  {
+    "username": "user10",
+    "password": "1010",
+    "nickname": "스타벅스",
+    "githubId": "user10@naver.com",
+    "commit": "1050"
+  }
+]

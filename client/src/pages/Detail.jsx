@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import firstCrown from '../imgs/firstCrown.png';
 import secondCrown from '../imgs/secondCrown.png';
 import thirdCrown from '../imgs/thirdCrown.png';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
 const DetailContainer = styled.div`
   margin-top: 30px;
@@ -45,37 +48,54 @@ const TableBox = styled.div`
 `
 
 const Detail = () => {
-  const point = 300;
+
+  const {name} = useParams();
+
+  const fetchData = async() => {
+    const res = await axios.get(`http://localhost:4000/userdetail?usernickname=${name}`);
+    return res.data;
+  }
+
+  const {data} = useQuery({
+    queryKey: ['userDetail'],
+    queryFn: fetchData
+  })
+
+  const point = data?.commit;
   let userCrown;
 
   if (point >= 1000) {
-    userCrown = <img src={firstCrown} alt="Second Crown" />;
+    userCrown = <img src={secondCrown} alt="Second Crown" />;
   } else if (point >= 1000) {
-    userCrown = <img src={secondCrown} alt="First Crown" />;
+    userCrown = <img src={firstCrown} alt="First Crown" />;
   } else {
     userCrown = <img src={thirdCrown} alt="Third Crown" />;
   }
 
   return (
     <DetailContainer>
-      <DetailUserName>
-        {userCrown}
-        <h1>chan1911</h1>
-      </DetailUserName>
-      <DetailTable>
-        <TableBox>
-          <div><p>출석</p></div>
-          <div><p>32</p></div>
-        </TableBox>
-        <TableBox>
-          <div><p>커밋</p></div>
-          <div><p>323</p></div>
-        </TableBox>
-        <TableBox>
-          <div><p>포인트</p></div>
-          <div><p>3211 pt</p></div>
-        </TableBox>
-      </DetailTable>
+      {data?.map(item => (
+        <>
+        <DetailUserName>
+          {userCrown}
+          <h1>{item.username}</h1>
+        </DetailUserName>
+        <DetailTable>
+          <TableBox>
+            <div><p>깃허브이메일</p></div>
+            <div><p>{item.githubId}</p></div>
+          </TableBox>
+          <TableBox>
+            <div><p>커밋</p></div>
+            <div><p>{item.commit}</p></div>
+          </TableBox>
+          <TableBox>
+            <div><p>닉네임</p></div>
+            <div><p>{item.nickname}</p></div>
+          </TableBox>
+        </DetailTable>
+        </>
+      ))}
 
     </DetailContainer>
   )

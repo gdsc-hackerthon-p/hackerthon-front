@@ -10,7 +10,8 @@ import styled from 'styled-components';
 import firstCrown from '../imgs/firstCrown.png';
 import testImg from '../imgs/testImg.png';
 import goldFrame from '../imgs/goldframe.png';
-import frame from '../imgs/frame.png';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 const MainSwiperContainer = styled.div`
   padding-bottom: 25px;
@@ -58,6 +59,21 @@ const MainSwiperContainer = styled.div`
 `
 
 const MainSwiper = () => {
+
+  const fetchData = async() => {
+    const res = await axios.get('http://localhost:4000/user');
+    return res.data.slice(3,11);
+  }
+
+  const {data, status, error} = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: fetchData
+  })
+
+  if(status === 'error') {
+    console.log(error)
+  }
+
   return (
     <MainSwiperContainer>
       <div className='top10'>
@@ -87,47 +103,12 @@ const MainSwiper = () => {
           }
         }}
       >
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-        <SwiperSlide className='slide'>
-          <img src={testImg} alt="#" />
-          <p>홍길동</p>
-        </SwiperSlide>
-
+        {data?.map(item => (
+          <SwiperSlide key={item.username} className='slide'>
+            <img src={testImg} alt="#" />
+            <p>{item.nickname}</p>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </MainSwiperContainer>
   )
